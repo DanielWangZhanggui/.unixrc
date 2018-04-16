@@ -102,49 +102,5 @@ fi
 # Add misc useful tools to PATH
 export PATH=$PATH:$HOME/code/tool/scripts
 
-##-------------------------------------------------------------------------------
-## Configs for Linux and Mac
-##   chrome:  open file in new tab (chrome should already be opened)
-##   emacs:   open file in new frame (GUI emacs should already be opened)
-##   emacsnw: open terminal emacs
-##   emacsserver: open emacs GUI
-##-------------------------------------------------------------------------------
-if [[ `uname` == "Darwin" ]]; then
-  alias chrome="open -a Google\ Chrome"
-  alias emacs="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n"
-  alias emacsnw="TERM=xterm-256color /Applications/Emacs.app/Contents/MacOS/Emacs -nw"
-  alias emacsserver="/Applications/Emacs.app/Contents/MacOS/Emacs"
-  # Need full path for EDITOR variable in OSX.
-  export EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
-  export HOMEBREW_TEMP=/usr/local/TEMP
-  export GOROOT=/usr/local/opt/go/libexec
-elif [[ `uname` == "Linux" ]]; then
-  alias chrome="google-chrome"
-  alias emacs="/usr/local/bin/emacsclient -n"
-  alias emacsnw="TERM=xterm-256color /usr/local/bin/emacs -nw"
-  alias emacsserver="/usr/local/bin/emacs"
-  export EDITOR="emacsclient"     # TODO: make sure emacs server started
-fi
 
-##-------------------------------------------------------------------------------
-## Configs for different hosts
-##-------------------------------------------------------------------------------
-if [[ `hostname` == "Deyuans-Macbook-Air.local" ]]; then
-  alias mysql=/usr/local/mysql/bin/mysql
-  alias mysqladmin=/usr/local/mysql/bin/mysqladmin
-  alias mysqld_safe=/usr/local/mysql/bin/mysqld_safe
-elif [[ `hostname` == "Deyuans-MacBook-Pro.local" ]]; then
-  # Due to MacOS SIP (System Integration Protection), installing python libraries
-  # will be rejected if it touches '/System' directory. It is thus recommended to
-  # install per user, i.e. "pip install ipython --user". This is needed for MacOS
-  # ElCapitan. The path is updated to include the binaries installed for current
-  # user. Use "python -m site" to see all system path.
-  export PATH=$PATH:$HOME/Library/Python/2.7/bin
-elif [[ `hostname` == "deyuan.pit.corp.google.com" ]]; then
-  unsetopt correct_all          # Do not autocorrect
-  export P4EDITOR="emacsclient"
-  source /etc/bash_completion.d/g4d
-elif [[ `hostname` == "deyuan-macbookpro.roam.corp.google.com" ]]; then
-elif [[ `hostname` == "watermelon" ]]; then
-  # eval `dircolors ~/.dir_colors` # do not using annoying background for 'ls'
-fi
+
